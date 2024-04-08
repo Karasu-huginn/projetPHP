@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300&family=Work+Sans:wght@300&display=swap');
+
+html {
+    font-family: 'Merriweather', serif;
+    background-color: rgb(235, 235, 235);
+  }
+  
+.grid-general {
+    margin: 0px;
+    display: grid;
+    grid-template-columns: 1fr 5fr 1fr;
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    background-color: rgb(218, 218, 218);
+    grid-row-gap: 0px;
+  }
+
+  header {
+    grid-column: 1/4;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background-color: rgb(59, 103, 187);
+    display: grid;
+    grid-template-columns: 40px 95px 30px 3fr 95px 30px 95px 40px;
+    grid-template-rows: 10px 30px 30px 35px 10px;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    box-shadow: 1px 1px 20px rgba(43, 43, 43, 0.39);
+    z-index: 1;
+  }
+
+  img[src="logo.png"] {
+    max-height: 100%;
+  }
+  
+  .logo {
+    grid-row: 2/5;
+    grid-column: 2/3;
+  }
+
+  .cart {
+    grid-row: 2/5;
+    grid-column: 5/6;
+}
+
+.cart img {
+    width: 100%;
+    height: 100%;
+    border-radius: 100px;
+  }
+
+  header h1 {
+    grid-row: 2/3;
+    grid-column: 4/5;
+    font-size: 90px;
+    text-align: center;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 300;
+    margin: 0px;
+  }
+
+  header a.search, header a.connection {
+    text-decoration: none;
+    color: black;
+    background-color: white;
+    text-align: center;
+    border-radius: 10%/30%;
+    transition-duration: 200ms;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 14px;
+    box-shadow: 2px 2px 5px rgba(56, 56, 56, 0.432);
+    font-family: 'Merriweather', serif;
+  }
+  
+  header .search:hover, header .connection:hover {
+    background-color: black;
+    color: white;
+    cursor:pointer;
+  }
+  
+  h1,h2 {
+    font-family: 'Work Sans', sans-serif;
+  }
+  
+  .search {
+    grid-row:2/3;
+    grid-column: 7/8;
+  }
+  
+  .connection {
+    grid-row: 4/5;
+    grid-column: 7/8;
+  }
+  
