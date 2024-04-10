@@ -13,7 +13,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="style.css">
-        <link rel="stylesheet" href="styleLogin.css">
+        <link rel="stylesheet" href="styleRegister.css">
         <title>Connexion</title>
     </head>
     <body class="grid-general">
@@ -21,53 +21,53 @@
             <a href="index.php" class="logo"><img src="logo.png" alt="Retourner sur la page principale"></a>
             <h1>Titre du site</h1>
             <a class="search" href="search.php">Rechercher</a>
-            <a class="connection" href="register.php">Inscription</a>
+            <a class="connection" href="login.php">Se connecter</a>
         </header>
         <div class="grid-page-auth">
-            <h1 class="titre-auth">Connexion</h1>
+            <h1 class="titre-auth">Inscription</h1>
             <form action="" method="POST">
                 <label for="email">Veuillez entrer votre email :</label>
                 <input type="email" name="email">
+                <label for="username">Veuillez entrer votre pseudo :</label>
+                <input type="text" name="username">
                 <label for="password">Veuillez entrer votre phrase de passe :</label>
                 <input type="password" name="password">
                 <button type="submit">Se connecter</button>
             </form>
-            <a href="register.php" class="register-link">Vous n'avez pas encore de compte ? Créez-en un ici !</a>
+            <a href="register.php" class="register-link">Vous avez déjà un compte ? Connectez-vous ici !</a>
             <?php
-                if (isset($_POST['email']) == true && isset($_POST['password']) == true && empty($_POST['email']) == false && empty($_POST['password']) == false)
+                function insert_user($email, $username, $password)
+                {
+                    $pdo = new PDO("mysql:host=localhost;dbname=php_lab_storage","root","");
+                    $sqlRequest = "INSERT INTO users (email, username, password) VALUES ('$email' , '$username' , '$password')";
+                    $pdo->exec($sqlRequest);
+                }
+
+                if (isset($_POST['email']) == true && isset($_POST['username']) == true && isset($_POST['password']) == true && empty($_POST['email']) == false  && empty($_POST['username']) == false && empty($_POST['password']) == false)
                 {
                     $email = $_POST['email'];
-                    $password = $_POST['password'];
+                    $username = $_POST['username'];
+                    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
                     $pdo = new PDO("mysql:host=localhost;dbname=php_lab_storage","root","");
                     $stmt = $pdo->prepare("SELECT email FROM users");
                     $stmt->execute();
                     $result = $stmt->fetchAll();
                     $userExists = false;
-                    for ($i = 0; $i < count($result);$i++)
+                    for ($i = 0; $i < count($result); $i++)
                     {
                         if ($result[$i]['email'] == $email)
                         {
-                            $stmt = $pdo->prepare("SELECT password FROM users WHERE email='$email'");
-                            $stmt->execute();
-                            $result = $stmt->fetchAll();
+                            echo "<h2 class='error'>Un compte existe déjà avec cette adresse email !</h2>";
                             $userExists = true;
-                            if (password_verify($password, $result[0]['password']))
-                            {
-                                $stmt = $pdo->prepare("SELECT ID FROM users WHERE email='$email'");
-                                $stmt->execute();
-                                $result = $stmt->fetchAll();
-                                $_SESSION['userID'] = $result[0]['ID'];
-                                header("Location: index.php");
-                                exit();
-                            }
-                            else {
-                                echo "<h2 class='error'>Phrase de passe incorrect !</h2>";
-                            }
                         }
                     }
                     if (!$userExists)
                     {
-                        echo "<h2 class='error'>Email Introuvable !</h2>";
+                        if(strlen($email) < 200 && strlen($username) < 200)
+                        {
+                            insert_user($email, $username, $password);
+                            echo "<h2 class='success'>Votre compte a été créé, vous pouvez désormais vous connecter.</h2>";
+                        }
                     }
                 }
             ?>

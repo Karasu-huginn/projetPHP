@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -12,8 +16,17 @@
             <a href="index.php" class="logo"><img src="logo.png" alt="Retourner sur la page principale"></a>
             <h1>Titre du site</h1>
             <a class="search" href="search.php">Rechercher</a>
-            <a class="connection" href="login.php">Se connecter</a>
-            <a class="cart" href="cart.php" class="logo"><img src="cart.png" alt="Accéder au panier"></a>
+            <?php
+                if (!empty($_SESSION['userID']))
+                {
+                    echo "<a class='connection' href='logout.php'>Déconnexion</a>";
+                    echo "<a class='cart' href='cart.php' class='logo'><img src='cart.png' alt='Accéder au panier'></a>";
+                }
+                else 
+                {
+                    echo "<a class='connection' href='login.php'>Se connecter</a>";
+                }
+            ?>
         </header>
         <div class="grid-page-film">
             <button class="buy-button" type="submit" name="buyButton">Acheter</button>
@@ -58,12 +71,12 @@
                         return $result[0]['displayName'];
                     }
                     
-                    $videoObject = get_video_infos($_GET['id']); // <- id de la vidéo dans la base de données
-                    $authorName = get_video_author($videoObject->authorID);
-                    echo "<style type='text/css'> .poster { background-image: url(".$videoObject->thumbnailLink."); } </style>";
-                    echo "<div class='poster'><h2>".$videoObject->name."</h2></div>";
-                    echo "<div class='acteurs'><h2>Acteurs</h2><!--Insérer acteurs ici--><h2>Réalisé par : ".$authorName."</h2></div>";
-                    echo "<div class='price'><h3>".$videoObject->price."€</h3></div>";
+                $videoObject = get_video_infos($_GET['id']); // <- id de la vidéo dans la base de données
+                $authorName = get_video_author($videoObject->authorID);
+                echo "<style type='text/css'> .poster { background-image: url(".$videoObject->thumbnailLink."); } </style>";
+                echo "<div class='poster'><h2>".$videoObject->name."</h2></div>";
+                echo "<div class='acteurs'><h2>Acteurs</h2><!--Insérer acteurs ici--><h2>Réalisé par : ".$authorName."</h2></div>";
+                echo "<div class='price'><h3>".$videoObject->price."€</h3></div>";
             ?>
         </div>
     </body>

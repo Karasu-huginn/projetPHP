@@ -24,7 +24,7 @@ form {
     grid-row: 4/5;
     grid-column: 3/4;
     display: grid;
-    grid-template-rows: 100px 40px 100px 40px 100px;
+    grid-template-rows: 100px 40px 100px 40px 100px 40px 100px;
     text-align: center;
 }
 
@@ -51,20 +51,31 @@ input[name="email"] {
     margin-top: 3%;
 }
 
-label[for="password"] {
+label[for="username"] {
     grid-row:3/4;
     grid-column: 1/4;
 }
 
-input[name="password"] {
+input[name="username"] {
     grid-row:3/4;
+    grid-column: 1/4;
+    margin-top:3%;
+}
+
+label[for="password"] {
+    grid-row:5/6;
+    grid-column: 1/4;
+}
+
+input[name="password"] {
+    grid-row:5/6;
     grid-column: 1/4;
     margin-top:3%;
 }
 
 
 button {
-    grid-area: 5/1/6/4;
+    grid-area: 7/1/8/4;
     font-size: 40px;
     font-family: 'Merriweather', serif;
     text-decoration: none;

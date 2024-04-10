@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -5,16 +9,25 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="styleSearch.css">
-        <title>Alhuile-Ciné - Rechercher</title>
+        <title>Rechercher</title>
     </head>
     <body class="grid-general">
         <header>
                 <a href="index.php" class="logo"><img src="logo.png" alt="Retourner sur la page principale"></a>
                 <h1>Titre du site</h1>
                 <a class="search" href="search.php">Rechercher</a>
-                <a class="connection" href="login.php">Se connecter</a>
-                <a class="cart" href="cart.php" class="logo"><img src="cart.png" alt="Accéder au panier"></a>
-            </header>
+            <?php
+                if (!empty($_SESSION['userID']))
+                {
+                    echo "<a class='connection' href='logout.php'>Déconnexion</a>";
+                    echo "<a class='cart' href='cart.php' class='logo'><img src='cart.png' alt='Accéder au panier'></a>";
+                }
+                else 
+                {
+                    echo "<a class='connection' href='login.php'>Se connecter</a>";
+                }
+            ?>
+        </header>
             <div class="grid-page-recherche">
                 <form action="" method="POST" class="barre-recherche">
                     <input type="text" name="search" placeholder="Rechercher une vidéo..." class="input-recherche">
