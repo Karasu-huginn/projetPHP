@@ -1,0 +1,86 @@
+.grid-page-film {
+    grid-row:2/3;
+    grid-column: 2/3;
+    display: grid;
+    grid-template-columns: 40px 12fr 40px 6fr 40px;
+    grid-template-rows: 40px 400px 40px 1fr 40px 1px 40px 100px 40px;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    box-shadow: 1px 1px 20px rgba(75, 75, 75, 0.212);
+    background-color: rgb(245, 243, 243);
+}
+
+.poster {
+    grid-row:2/3;
+    grid-column:2/5;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 9fr 1fr;
+    background-size: 100%;
+    transition-duration: 300ms;
+    background-position: 50% 30%;
+    box-shadow: 1px 1px 50px rgba(54, 54, 54, 0.527) inset;
+}
+
+.poster:hover {
+    background-size: 110%;
+    padding-bottom: 20px;
+}
+
+.poster img {
+    grid-row: 1/3;
+    grid-column: 1/3;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.poster h2 {
+    grid-row: 2/3;
+    grid-column: 1/3;
+    color:white;
+    font-size: 42px;
+    padding-left: 50px;
+    text-shadow: 2px 2px 4px grey;
+    font-family: 'Work Sans', sans-serif;
+    transition-duration: 300ms;
+}
+
+.acteurs {
+    grid-row: 4/5;
+    grid-column: 2/3;
+    font-size: 22px;
+    text-align: center;
+    padding: 10px;
+    line-height: 40px;
+}
+
+.acteurs h2 {
+    font-size: 30px;
+    padding-bottom: 15px;
+}
+
+.price {
+    grid-row: 4/5;
+    grid-column: 4/5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    border-left: 1px solid yellow;
+}
+
+.buy-button { 
+    grid-area: 8 / 2 / 9 / 5;
+    border-radius: 7%/50%;
+    box-shadow: 2px 2px 5px rgba(56, 56, 56, 0.432);
+    margin-left: 200px;
+    margin-right: 200px;
+    font-size:32px;
+    transition-duration: 200ms;
+ }
+
+ .buy-button:hover {
+    color:white;
+    background-color: black;
+    cursor:pointer;
+ }
