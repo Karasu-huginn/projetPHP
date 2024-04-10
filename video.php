@@ -52,6 +52,19 @@
                     }
                 }
 
+                class Actor {
+                    public $actorID;
+                    public $name;
+                    public $imageLink;
+
+                    function __construct($actorID, $name, $imageLink)
+                    {
+                        $this->actorID = $actorID;
+                        $this->name = $name;
+                        $this->imageLink = $imageLink;
+                    }
+                }
+
                 function get_video_infos($videoId) // récupère les informations d'une vidéo en fonction de son ID et retourne le tout en objet
                     {
                         $pdo = new PDO("mysql:host=localhost;dbname=php_lab_storage","root","");
@@ -70,12 +83,44 @@
                         $result = $stmt->fetchAll();
                         return $result[0]['displayName'];
                     }
+
+                function get_video_actors($videoId) // récupère les noms des différents acteurs de la vidéo
+                {
+                    $pdo = new PDO("mysql:host=localhost;dbname=php_lab_storage","root","");
+                    $stmt = $pdo->prepare("SELECT * FROM actors_videos WHERE videoId = '$videoId'");
+                    $stmt->execute();
+                    $result = $stmt->fetchAll();
+                    $actorsIds = array();
+                    for ($i = 0; $i < count($result); $i++)
+                    {
+                        $actorsIds[] = $result[$i]['actorId'];
+                    }
+                    return $actorsIds;
+                }
+
+                function get_actor_infos($actorId)
+                {
+                    $pdo = new PDO("mysql:host=localhost;dbname=php_lab_storage","root","");
+                    $stmt = $pdo->prepare("SELECT * FROM actors WHERE ID = '$actorId'");
+                    $stmt->execute();
+                    $result = $stmt->fetchAll();
+                    $actorObject = new Actor($result[0]['ID'], $result[0]['name'], $result[0]['imageLink']); 
+                    return $actorObject;
+                }
                     
                 $videoObject = get_video_infos($_GET['id']); // <- id de la vidéo dans la base de données
                 $authorName = get_video_author($videoObject->authorID);
+                $actorsIds = get_video_actors($videoObject->videoID);
                 echo "<style type='text/css'> .poster { background-image: url(".$videoObject->thumbnailLink."); } </style>";
                 echo "<div class='poster'><h2>".$videoObject->name."</h2></div>";
-                echo "<div class='acteurs'><h2>Acteurs</h2><!--Insérer acteurs ici--><h2>Réalisé par : ".$authorName."</h2></div>";
+                echo "<div class='details'><h2>Acteurs</h2><div class='actors'>";
+                for ($i = 0; $i < count($actorsIds); $i++)
+                {
+                    $actorObject = get_actor_infos($actorsIds[$i]);
+                    //echo "<div class='actor-card'><img src=''><h3>Dwayne Johnson</h3></div>";
+                    echo "<div class='actor-card'><img src='".$actorObject->imageLink."'><h3>".$actorObject->name."</h3></div>";
+                }
+                echo "</div><h2>Réalisé par : ".$authorName."</h2></div>";
                 echo "<div class='price'><h3>".$videoObject->price."€</h3></div>";
             ?>
         </div>
