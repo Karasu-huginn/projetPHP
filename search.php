@@ -34,7 +34,7 @@
                 </form>
             <div class="resultats-recherche">
                 <?php
-                    class Video {
+                    class Video {   // sert à stocker les informations d'une vidéo
                         public $videoID;
                         public $name;
                         public $thumbnailLink;

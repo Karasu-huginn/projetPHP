@@ -31,7 +31,7 @@
         <div class="grid-page-film">
             <button class="buy-button" type="submit" name="buyButton">Acheter</button>
             <?php
-                class Video {
+                class Video {   // sert à stocker les différentes informations d'une vidéo
                     public $videoID;
                     public $name;
                     public $thumbnailLink;
@@ -52,7 +52,7 @@
                     }
                 }
 
-                class Actor {
+                class Actor {   // sert à stocker les différentes informations d'un acteur
                     public $actorID;
                     public $name;
                     public $imageLink;
@@ -98,7 +98,7 @@
                     return $actorsIds;
                 }
 
-                function get_actor_infos($actorId)
+                function get_actor_infos($actorId)  // récupère les informations d'un acteur dans la base de données
                 {
                     $pdo = new PDO("mysql:host=localhost;dbname=php_lab_storage","root","");
                     $stmt = $pdo->prepare("SELECT * FROM actors WHERE ID = '$actorId'");

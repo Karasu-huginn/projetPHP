@@ -13,9 +13,9 @@
     <body>
         <a href="index.php">Return to main page</a>
         <?php
-            session_unset();
-            session_destroy();
-            header("Location: index.php");
+            session_unset();    // on supprime toutes les variables stockées dans la session
+            session_destroy();  // on supprime la session
+            header("Location: index.php");  // on redirige l'utilisateur
             exit();
         ?>
     </body>

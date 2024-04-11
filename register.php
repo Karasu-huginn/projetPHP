@@ -36,26 +36,27 @@
             </form>
             <a href="register.php" class="register-link">Vous avez déjà un compte ? Connectez-vous ici !</a>
             <?php
-                function insert_user($email, $username, $password)
+                function insert_user($email, $username, $password)  // inscrit les données de l'utilisateur dans la base de données
                 {
                     $pdo = new PDO("mysql:host=localhost;dbname=php_lab_storage","root","");
                     $sqlRequest = "INSERT INTO users (email, username, password) VALUES ('$email' , '$username' , '$password')";
                     $pdo->exec($sqlRequest);
                 }
 
+                // si le formulaire d'inscription est remplie :
                 if (isset($_POST['email']) == true && isset($_POST['username']) == true && isset($_POST['password']) == true && empty($_POST['email']) == false  && empty($_POST['username']) == false && empty($_POST['password']) == false)
                 {
                     $email = $_POST['email'];
                     $username = $_POST['username'];
-                    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+                    $password = password_hash($_POST['password'], PASSWORD_BCRYPT); // hash le mot de passe
                     $pdo = new PDO("mysql:host=localhost;dbname=php_lab_storage","root","");
                     $stmt = $pdo->prepare("SELECT email FROM users");
                     $stmt->execute();
                     $result = $stmt->fetchAll();
                     $userExists = false;
-                    for ($i = 0; $i < count($result); $i++)
+                    for ($i = 0; $i < count($result); $i++) // itère tous les emails dans la base ded données
                     {
-                        if ($result[$i]['email'] == $email)
+                        if ($result[$i]['email'] == $email) // vérifie si l'email existe déjà dans la base de données
                         {
                             echo "<h2 class='error'>Un compte existe déjà avec cette adresse email !</h2>";
                             $userExists = true;

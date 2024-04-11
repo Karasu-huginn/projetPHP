@@ -1,5 +1,5 @@
 <?php
-    session_start();
+    session_start();    // ouvre la session pour que l'utilisateur soit connecté
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -16,7 +16,7 @@
             <h1>Titre du site</h1>
             <a class="search" href="search.php">Rechercher</a>
             <?php
-                if (!empty($_SESSION['userID']))
+                if (!empty($_SESSION['userID']))    // si l'utilisateur est connecté
                 {
                     echo "<a class='connection' href='logout.php'>Déconnexion</a>";
                     echo "<a class='cart' href='cart.php' class='logo'><img src='cart.png' alt='Accéder au panier'></a>";
