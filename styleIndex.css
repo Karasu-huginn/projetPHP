@@ -4,8 +4,62 @@
     grid-column: 2/3;
     display: grid;
     grid-template-columns: 40px 8fr 40px 8fr 40px 8fr 40px;
-    grid-template-rows: 40px 700px 40px 1fr 40px;
+    grid-template-rows: 40px 1fr 40px 1fr 40px;
     grid-column-gap: 0px;
     grid-row-gap: 0px;
     box-shadow: 1px 1px 20px rgba(43, 43, 43, 0.342);
   }
+
+  
+.trending {
+  grid-row: 4/5;
+  grid-column: 2/7;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+
+.trending-item {
+  width: 33%;
+  height: 200px;
+  background-size: 100%;
+  box-shadow: 1px 1px 20px rgba(54, 54, 54, 0.384) inset;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  margin-bottom: 7px;
+  transition-duration: 200ms;
+  background-position: 50% 50%;
+  text-decoration: none;
+}
+
+.trending-item:hover{
+  background-size: 110%;
+}
+
+.trending-item h2 {
+  color:white;
+  font-size: 30px;
+  text-shadow: 2px 2px 4px rgb(66, 66, 66);
+  font-family: 'Work Sans', sans-serif;
+  text-align: center;
+}
+
+.trending-item p {
+  color:white;
+  font-size: 12px;
+  text-shadow: 2px 2px 4px rgb(66, 66, 66);
+  font-family: 'Merriweather', serif;
+  text-align: center;
+}
+
+.welcome {
+  text-align: center;
+  grid-area: 2 / 2 / 3 / 7;
+}
+
+.welcome h1 {
+  font-size:50px;
+  font-weight: 600;
+}
