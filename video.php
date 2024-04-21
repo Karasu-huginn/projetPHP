@@ -130,10 +130,9 @@
                 for ($i = 0; $i < count($actorsIds); $i++)
                 {
                     $actorObject = get_actor_infos($actorsIds[$i]);
-                    //echo "<div class='actor-card'><img src=''><h3>Dwayne Johnson</h3></div>";
                     echo "<div class='actor-card'><img src='".$actorObject->imageLink."'><h3>".$actorObject->name."</h3></div>";
                 }
-                echo "</div><h2>Réalisé par : ".$authorName."</h2></div>";
+                echo "</div><h2>Réalisé par : <a href='author.php?id=".$videoObject->authorID."'>".$authorName."</a></h2></div>";
                 echo "<div class='price'><h3>".$videoObject->price."€</h3></div>";
 
                 if(array_key_exists('buyButton', $_POST)) {
