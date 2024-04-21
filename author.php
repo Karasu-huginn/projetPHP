@@ -51,7 +51,7 @@
                     }
                 }
 
-                class Author {
+                class Author {  // sert à stocker les différentes informations d'une vidéo
                     public $authorId;
                     public $name;
                     public $imageLink;
@@ -86,7 +86,7 @@
                     return $authorObject;
                 }
 
-                function get_author_videos($authorId)
+                function get_author_videos($authorId)   // récupère les ids des différentes vidéos liées à un réalisateur
                 {
                     $pdo = new PDO("mysql:host=localhost;dbname=php_lab_storage","root","");
                     $stmt = $pdo->prepare("SELECT ID FROM videos WHERE authorId = '$authorId'");

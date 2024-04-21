@@ -30,7 +30,7 @@
         </header>
         <div class="grid-page-film">
             <?php
-                if (!empty($_SESSION['userID']))
+                if (!empty($_SESSION['userID']))    // affiche le bouton uniquement si l'utilisateur est connecté car un utilisateur non-connecté ne peut pas utiliser la fonctionnalité du panier
                 {
                     echo '<form method="post" class="buy-button-form"><button class="buy-button" type="submit" name="buyButton">Acheter</button></form>';
                 }
@@ -111,7 +111,7 @@
                     return $actorObject;
                 }
 
-                function buy_video()
+                function buy_video()    // créée une ligne dans le tableau des commandes d'utilisateurs contenant l'id de l'utilisateur et l'id de la vidéo
                 {
                     $videoId = $_GET["id"];
                     $userId = $_SESSION["userID"];
@@ -135,7 +135,7 @@
                 echo "</div><h2>Réalisé par : <a href='author.php?id=".$videoObject->authorID."'>".$authorName."</a></h2></div>";
                 echo "<div class='price'><h3>".$videoObject->price."€</h3></div>";
 
-                if(array_key_exists('buyButton', $_POST)) {
+                if(array_key_exists('buyButton', $_POST)) { // vérifie qu'un bouton nommé buyButton est pressé
                     buy_video();
                 } 
 

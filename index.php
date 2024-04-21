@@ -51,7 +51,7 @@
             </span>
             <div class="categories">
                 <?php
-                    function get_category_name($categoryId)
+                    function get_category_name($categoryId) // récupère le nom d'une catégorie
                     {
                         $pdo = new PDO("mysql:host=localhost;dbname=php_lab_storage","root","");
                         $stmt = $pdo->prepare("SELECT name FROM categories WHERE ID = '$categoryId'");
@@ -60,7 +60,7 @@
                         return $result[0]['name'];
                     }
 
-                    function get_category_last_id()
+                    function get_category_last_id() // récupère l'ID de la dernière catégorie pour savoir combien de catégories doivent être prises en compte pour le générateur de nombres randoms
                     {
                         $pdo = new PDO("mysql:host=localhost;dbname=php_lab_storage","root","");
                         $stmt = $pdo->prepare("SELECT ID FROM categories ORDER BY ID DESC LIMIT 1");
@@ -69,7 +69,7 @@
                         return $result[0]['ID'];
                     }
 
-                    function is_in_array($array, $value)
+                    function is_in_array($array, $value)    // vérifie si une valeur se trouve dans un array, renvoie un booléen
                     {
                         for ($i = 0; $i < count($array); $i++)
                         {
@@ -127,7 +127,7 @@
                     return $videoObject;
                 }
                 
-                function get_last_videos()
+                function get_last_videos()  // récupère les 20 dernières vidéos postées en date grâce aux 20 plus hauts IDs
                 {
                     $pdo = new PDO("mysql:host=localhost;dbname=php_lab_storage","root","");
                     $stmt = $pdo->prepare("SELECT * FROM videos ORDER BY ID DESC LIMIT 20");
