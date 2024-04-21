@@ -29,8 +29,11 @@
             ?>
         </header>
         <div class="grid-page-film">
-            <button class="buy-button" type="submit" name="buyButton">Acheter</button>
             <?php
+                if (!empty($_SESSION['userID']))
+                {
+                    echo '<form method="post" class="buy-button-form"><button class="buy-button" type="submit" name="buyButton">Acheter</button></form>';
+                }
                 class Video {   // sert à stocker les différentes informations d'une vidéo
                     public $videoID;
                     public $name;
@@ -107,6 +110,16 @@
                     $actorObject = new Actor($result[0]['ID'], $result[0]['name'], $result[0]['imageLink']); 
                     return $actorObject;
                 }
+
+                function buy_video()
+                {
+                    $videoId = $_GET["id"];
+                    $userId = $_SESSION["userID"];
+                    $pdo = new PDO("mysql:host=localhost;dbname=php_lab_storage","root","");
+                    $sqlRequest = "INSERT INTO users_commands (userID, videoID) VALUES ('$userId' , '$videoId')";
+                    $pdo->exec($sqlRequest);
+                    echo '<h2 class="success">Vidéo ajoutée au panier.</h2>';
+                }
                     
                 $videoObject = get_video_infos($_GET['id']); // <- id de la vidéo dans la base de données
                 $authorName = get_video_author($videoObject->authorID);
@@ -122,6 +135,11 @@
                 }
                 echo "</div><h2>Réalisé par : ".$authorName."</h2></div>";
                 echo "<div class='price'><h3>".$videoObject->price."€</h3></div>";
+
+                if(array_key_exists('buyButton', $_POST)) {
+                    buy_video();
+                } 
+
             ?>
         </div>
     </body>

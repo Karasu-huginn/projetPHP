@@ -95,12 +95,17 @@
     border-left: 1px solid yellow;
 }
 
-.buy-button { 
+.buy-button-form {
     grid-area: 8 / 2 / 9 / 5;
-    border-radius: 7%/50%;
-    box-shadow: 2px 2px 5px rgba(56, 56, 56, 0.432);
     margin-left: 200px;
     margin-right: 200px;
+}
+
+.buy-button { 
+    width: 100%;
+    height: 100%;
+    border-radius: 7%/50%;
+    box-shadow: 2px 2px 5px rgba(56, 56, 56, 0.432);
     font-size:32px;
     transition-duration: 200ms;
  }
@@ -111,3 +116,10 @@
     cursor:pointer;
  }
 
+
+ .success {
+    color: rgb(35, 177, 35);
+    grid-area: 5/2/6/6;
+    text-align: center;
+    font-size: 32px;
+}
