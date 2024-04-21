@@ -43,8 +43,56 @@
                     echo "<h1>Welcome</h1>";
                 }
             ?>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae dignissimos animi labore, ut recusandae non debitis, quos tempore consectetur maiores sunt, magnam dolor. Accusamus recusandae exercitationem optio animi consequatur, possimus ad eligendi ab impedit perferendis ipsam libero cumque reiciendis molestias. Nesciunt labore minus dolorum quaerat ullam dolorem libero molestias dolores in nam, reprehenderit ad veniam architecto consectetur ipsa nulla? Itaque suscipit ad fuga veniam voluptatibus porro excepturi, nostrum ut commodi quis doloremque! Debitis, rerum laudantium provident, culpa repellat esse ex reiciendis, eius explicabo ea similique. Facere, natus, iure asperiores esse dolorum reiciendis rem dicta qui, saepe similique vel doloremque nesciunt!</p>
+            <p>Bienvenue sur notre plateforme de divertissement vidéo ! Que vous soyez à la recherche du dernier film à succès, d'une série captivante ou d'un documentaire inspirant, vous êtes au bon endroit. Notre site vous offre une expérience immersive où vous pouvez naviguer à travers un vaste catalogue de vidéos pour trouver exactement ce que vous recherchez. Que vous préfériez les drames émouvants, les comédies hilarantes ou les documentaires informatifs, nous avons quelque chose pour chaque passion et chaque humeur.</p>
+            <br>
+            <p>Vous pouvez commencer votre exploration en utilisant notre fonction de recherche pour trouver des titres spécifiques, vous connecter pour accéder à votre panier, ou vous inscrire pour découvrir les avantages exclusifs de notre communauté. De plus, nos catégories organisées vous permettent de plonger dans des univers thématiques variés.</p>
+            <br>
+            <p>Nous sommes ravis de vous accueillir dans notre communauté de passionnés de vidéos. Préparez-vous à vivre une expérience de divertissement sans pareille !</p>
             </span>
+            <div class="categories">
+                <?php
+                    function get_category_name($categoryId)
+                    {
+                        $pdo = new PDO("mysql:host=localhost;dbname=php_lab_storage","root","");
+                        $stmt = $pdo->prepare("SELECT name FROM categories WHERE ID = '$categoryId'");
+                        $stmt->execute();
+                        $result = $stmt->fetchAll();
+                        return $result[0]['name'];
+                    }
+
+                    function get_category_last_id()
+                    {
+                        $pdo = new PDO("mysql:host=localhost;dbname=php_lab_storage","root","");
+                        $stmt = $pdo->prepare("SELECT ID FROM categories ORDER BY ID DESC LIMIT 1");
+                        $stmt->execute();
+                        $result = $stmt->fetchAll();
+                        return $result[0]['ID'];
+                    }
+
+                    function is_in_array($array, $value)
+                    {
+                        for ($i = 0; $i < count($array); $i++)
+                        {
+                            if ($value == $array[$i])
+                            {
+                                return true;
+                            }
+                        }
+                    }
+
+                    $categories = array();
+                    for ($i = 0; $i < 3; $i++)
+                    {
+                        $maxCategoryId = get_category_last_id();
+                        do {
+                            $categoryId = random_int(1,$maxCategoryId);
+                        } while (is_in_array($categories, $categoryId));
+                        $categories[] = $categoryId;
+                        $categoryName = get_category_name($categoryId);
+                        echo '<span><a href="category.php?category='.$categoryId.'">'.$categoryName.'</a></span>';
+                    }
+                ?>
+            </div>
             <div class="trending">
                 <?php
                 

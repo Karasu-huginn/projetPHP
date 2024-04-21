@@ -35,7 +35,7 @@
                 $stmt = $pdo->prepare("SELECT * FROM categories WHERE ID = '$categoryId'");
                 $stmt->execute();
                 $result = $stmt->fetchAll();
-                echo "<h1 class='title'>".$result[0]['name']." videos :</h1>";
+                echo "<h1 class='title'>Vidéos ".$result[0]['name']." :</h1>";
 
                 echo '<div class="contenu-categorie">';
 
